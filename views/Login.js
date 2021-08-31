@@ -1,25 +1,47 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Platform} from 'react-native';
+import {Text, View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Platform, Button} from 'react-native';
 import {css} from '../assets/css/Css';
 
-export default function Login(){
+export default function Login(props){
 
     const [display, setDisplay]=useState('none');
+    const [user, setUser]=useState('none');
+    const [password, setPassword]=useState('none');
+    const [login, setLogin]=useState('none');
+
+    async function sendForm(){
+        let response = await fetch('https://192.168.15.127:3000/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: user,
+                password: password
+            })
+        })
+    }
 
     return(
         <KeyboardAvoidingView  behavior={Platform.OS === "ios" ? "padding" : "height"} style={[css.container, css.greenbg]}>
         <View>
-            <Image style={css.login__img} source={require('../assets/images/icon.png')}/>
+            <Image style={css.img__icon} source={require('../assets/images/icon.png')}/>
         </View>
 
         <View>
             <Text style={css.login__msg(display)}> Usuário ou senha inválidos </Text>
         </View>
         <View  style={css.login__form}>
-            <TextInput style={css.login__input} placeholder={'Usuário'} />
-            <TextInput style={css.login__input} placeholder={'Senha'} secureTextEntry={true}/>
-            <TouchableOpacity style={css.login__button} onPress={()=>setDisplay('flex')}>
+            <TextInput style={css.login__input} placeholder={'Email'} onChangeText={text=>setUser(text)}/>
+            <TextInput style={css.login__input} placeholder={'Senha'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
+            <TouchableOpacity style={css.login__button} onPress={()=>sendForm()}>
                 <Text style={css.login__buttonText}>Login</Text>
+            </TouchableOpacity>
+            <Text style={css.login__buttonTextCriarConta} onPress={()=>props.navigation.navigate('Cadastro')}>Criar uma conta</Text>
+
+            <TouchableOpacity style={css.login__buttonEntrarComoConvidado} >
+                <Text style={css.login__buttonTextEntrarComoConvidado}>Entrar como convidado</Text>
             </TouchableOpacity>
         </View>
         </KeyboardAvoidingView>
