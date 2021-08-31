@@ -30,7 +30,7 @@ export default function Cadastro(){
         <View>
             <Image style={css.cadastro__img__icon} source={require('../assets/images/icon.png')}/>
         </View>
-        <View  style={css.login__form}>
+        <View  style={css.cadastro__form}>
             <TextInput style={css.cadastro__input} placeholder={'Nome'} onChangeText={text=>setNome(text)}/>
             <TextInput style={css.cadastro__input} placeholder={'Email'} onChangeText={text=>setEmail(text)}/>
             <TextInput style={css.cadastro__input} placeholder={'Senha'} secureTextEntry={true} onChangeText={text=>setSenha(text)}/>

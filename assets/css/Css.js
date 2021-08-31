@@ -12,12 +12,13 @@ const css = StyleSheet.create({
         padding: 20
     },
     greenbg:{
+        width: "100%",
         backgroundColor: "#00A859"
     },
     img__icon:{
         width: 110,
         height: 110,
-        marginBottom: 70
+        marginBottom: 70,
     },
     login__msg: (text='none')=> ({
         fontSize: 22,
@@ -51,11 +52,15 @@ const css = StyleSheet.create({
         fontSize: 25,
         color: "#00A859"
     },
+    cadastro__form:{
+        width: "80%",
+        marginBottom: 130
+    },
     cadastro__input:{
         backgroundColor: "white",
         fontSize: 19,
         padding: 7,
-        marginBottom: 30
+        marginBottom: 20
     },
     cadastro__button:{
         padding: 15,
@@ -74,14 +79,14 @@ const css = StyleSheet.create({
     cadastro__img__icon:{
         width: 110,
         height: 110,
-        marginBottom: 60
+        marginBottom: 100
 
     },
     login__buttonTextCriarConta:{
         fontSize: 17,
         color: "#C0C0C0",
         marginLeft: 30,
-        marginTop: 20
+        marginTop: 30
     },
     login__buttonEntrarComoConvidado:{
         padding: 15,
@@ -97,6 +102,69 @@ const css = StyleSheet.create({
         fontSize: 18,
         color: "white"
     },
+    telaInicial__container: {
+        backgroundColor: "#00A859",
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    telaInicial__search:{
+        backgroundColor: "white",
+        fontSize: 19,
+        padding: 7,
+        width: "100%",
+        height: "10%",
+        // marginBottom: "50%"
+    },
+    telaInicial__map:{
+        height: "75%",
+        backgroundColor: 'gray'
+    },
+    telaInicial__icon:{
+      height: "5%",
+    },
+    telaInicial__img__icon:{
+        width: 50,
+        height: 50,
+        alignSelf: "center",
+    },
+
+    telaDois__container: {
+        backgroundColor: "#00A859",
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    telaDois__search:{
+        backgroundColor: "white",
+        fontSize: 19,
+        padding: 7,
+        width: "100%",
+        height: "10%",
+        opacity: 0.5
+        // marginBottom: "50%"
+    },
+    telaDois__map:{
+        height: "45%",
+        backgroundColor: 'black'
+    },
+    telaDois__instrucao:{
+        height: "30%",
+        width: "100%",
+        backgroundColor: 'white'
+    },
+    telaDois__icon:{
+        height: "5%",
+    },
+    telaDois__img__icon:{
+        width: 40,
+        height: 40,
+        alignSelf: "center",
+    },
+
+
+
+
 });
 
 export {css};
