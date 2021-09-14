@@ -43,7 +43,6 @@ const css = StyleSheet.create({
         backgroundColor: "#00A859",
         alignSelf: "center",
         borderRadius: 5,
-        marginTop: 5,
         width: "100%",
         alignItems: "center"
     },
@@ -86,8 +85,7 @@ const css = StyleSheet.create({
         fontSize: 17,
         color: "#C0C0C0",
         alignSelf: "center",
-        marginTop: "110%",
-        position: "absolute"
+        marginTop: "5%"
         /*Cores da tela inicial e botões alterados para melhor aparência. Cores a Definir */
     },
     login__buttonEntrarComoConvidado:{
