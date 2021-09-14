@@ -34,18 +34,17 @@ export default function Login(props) {
                 <Text style={css.login__msg(display)}> Usuário ou senha inválidos </Text>
             </View>
             <View style={css.login__form}>
-                <TextInput style={css.login__input} placeholder={'Email'} onChangeText={text => setUser(text)}/>
+                <TextInput style={css.login__input} placeholder={'E-mail'} onChangeText={text => setUser(text)}/>
                 <TextInput style={css.login__input} placeholder={'Senha'} secureTextEntry={true}
                            onChangeText={text => setPassword(text)}/>
                 <TouchableOpacity style={css.login__button} onPress={() => sendForm()}>
                     <Text style={css.login__buttonText}>Login</Text>
                 </TouchableOpacity>
-                <Text style={css.login__buttonTextCriarConta} onPress={() => props.navigation.navigate('Cadastro')}>Criar
-                    uma conta</Text>
+                <Text style={css.login__buttonTextCriarConta} onPress={() => props.navigation.navigate('Cadastro')}>Criar Conta</Text>
 
                 <TouchableOpacity style={css.login__buttonEntrarComoConvidado}
                                   onPress={() => props.navigation.navigate('TelaDois')}>
-                    <Text style={css.login__buttonTextEntrarComoConvidado}>Entrar como convidado</Text>
+                    <Text style={css.login__buttonTextEntrarComoConvidado}>Entrar Como Convidado</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>

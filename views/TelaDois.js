@@ -19,10 +19,18 @@ export default function TelaDois(props) {
             })
         })
     }
-
+    //Código abaixo com o intuito de apresentar na tela o mapa definido por longitude e latitude. AINDA NÃO ESTÁ APRESENTANDO
     return (
-        <View style={[css.container, css.greenbg]}>
-            <TextInput style={css.telaDois__search} placeholder={'destino'} onChangeText={text => setDestino(text)}/>
+        <View style={[css.telaDois__container, css.greenbg]}>
+            <MapView
+                style = {css.telaDois__map}
+                initialRegion = {{
+                    latitude: -23.57, 
+                    longitude: -46.64,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421
+                }}/> 
+
             {/*<MapView style={css.telaDois__map}*/}
             {/*         initialRegion={{*/}
             {/*             latitude: -23.53518,*/}
@@ -31,11 +39,9 @@ export default function TelaDois(props) {
             {/*             longitudeDelta: 0.0421*/}
             {/*         }}*/}
             {/*>*/}
-            <MapView style={css.telaDois__map} />
+            
+            <TextInput style={css.telaDois__search} placeholder={'Para Onde Vamos?'} onChangeText={text => setDestino(text)}/>
             <TextInput style={css.telaDois__instrucao}></TextInput>
-
-            <Image style={[css.telaDois__img__icon, css.telaDois__icon]}
-                   source={require('../assets/images/icon.png')}/>
         </View>
     );
 

@@ -22,7 +22,8 @@ export default function TelaInicial(props) {
 
     return (
         <View style={[css.container, css.greenbg]}>
-            <TextInput style={css.telaInicial__search} placeholder={'destino'} onChangeText={text => setDestino(text)}/>
+            <TextInput style={css.telaInicial__search} placeholder={'Qual o seu destino?'} onChangeText={text => setDestino(text)}/>
+
             {/*<MapView style={css.telaInicial__map}*/}
             {/*         initialRegion={{*/}
             {/*             latitude: -23.53518,*/}
