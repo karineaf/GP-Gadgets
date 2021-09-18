@@ -11,9 +11,9 @@ const css = StyleSheet.create({
         backgroundColor: "white",
         padding: 20
     },
-    greenbg:{
+    greybg:{
         width: "100%",
-        backgroundColor: "#46295a"
+        backgroundColor: "#484D50"
     },
     img__icon:{
         width: 110,
@@ -109,25 +109,32 @@ const css = StyleSheet.create({
         justifyContent: 'center',
         flex: 1
     },
-    telaInicial__search:{
+    telaInicial__view__search:{
+        marginTop: "10%",
         backgroundColor: "white",
         fontSize: 19,
         padding: 7,
         width: "100%",
-        height: "10%",
-        // marginBottom: "50%"
+        height: "18%"
+    },
+    telaInicial__view__map:{
+        height: "70%",
+        backgroundColor: "white",
+        width: "100%"
     },
     telaInicial__map:{
-        height: "75%",
-        backgroundColor: 'grey'
+        height: "100%",
+        width: "100%"
     },
-    telaInicial__icon:{
-      height: "5%",
+    telaInicial__view__icon:{
+      height: "4%",
     },
     telaInicial__img__icon:{
         width: 50,
         height: 50,
         alignSelf: "center",
+        alignContent: "center",
+        marginTop: "1%"
     },
 
     telaDois__container: {

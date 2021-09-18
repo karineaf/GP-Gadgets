@@ -38,7 +38,6 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="TelaInicial" options={{headerShown: false}} component={TelaInicial}/>
-                {/*<Stack.Screen name="AreaRestrita" component={AreaRestrita} />*/}
             </Stack.Navigator>
         </NavigationContainer>
     );
