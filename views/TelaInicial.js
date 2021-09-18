@@ -10,17 +10,15 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 export default function TelaInicial(props) {
 
-
-    const [origin, setOrigin] = useState(null);
-    const [destination, setDestination] = useState(null);
+    let [origin, setOrigin]=useState(null);
+    let [destination, setDestination]=useState(null);
 
     useEffect(()=>{
         (async function(){
             const { status, permissions } = await Location.requestForegroundPermissionsAsync();
             if (status === 'granted') {
                 let location = await Location.getLastKnownPositionAsync({});
-                setOrigin({
-                    latitude: location.coords.latitude,
+                setOrigin(origin = {latitude: location.coords.latitude,
                     longitude: location.coords.longitude,
                     latitudeDelta: 0.000922,
                     longitudeDelta: 0.000421
@@ -37,13 +35,12 @@ export default function TelaInicial(props) {
                 <GooglePlacesAutocomplete
                     placeholder='Qual é o seu destino?'
                     onPress={(data, details = null) => {
-                        // setDestination({
-                        //     latitude: details.geometry.location.lat,
-                        //     longitude: details.geometry.location.lng,
-                        //     latitudeDelta: 0.000922,
-                        //     longitudeDelta: 0.000421
-                        // });
-                        console.log(data, details)
+                        setDestination(destination = {
+                            latitude: details.geometry.location.lat,
+                            longitude: details.geometry.location.lng,
+                            latitudeDelta: 0.000922,
+                            longitudeDelta: 0.000421
+                        });
                     }}
                     query={{
                         key: config.googleApi,
