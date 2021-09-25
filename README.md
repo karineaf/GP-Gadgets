@@ -8,3 +8,4 @@ Aplicativo criado para auxiliar pessoas com deficiência visual a ganhar autonom
 'expo install expo-location'
 'expo install expo-permissions'
 'npm install react-native-google-places-autocomplete --save'
+'npm install react-native-maps-directions'
