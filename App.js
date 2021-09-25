@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {TelaInicial} from './views';
+import {TelaInicial, TelaDois} from './views';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
@@ -38,6 +38,7 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="TelaInicial" options={{headerShown: false}} component={TelaInicial}/>
+                <Stack.Screen name="TelaDois" options={{headerShown: false}} component={TelaDois}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -134,48 +134,48 @@ const css = StyleSheet.create({
         height: 50,
         alignSelf: "center",
         alignContent: "center",
-        marginTop: "1%"
+        marginTop: "3%"
     },
-
     telaDois__container: {
         backgroundColor: "#00A859",
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
     },
-    telaDois__search:{
+    telaDois__view__search:{
+        marginTop: "10%",
         backgroundColor: "white",
         fontSize: 19,
         padding: 7,
         width: "100%",
-        height: "8%",
-        opacity: 0.5
-        // marginBottom: "50%"
+        height: "12%"
+    },
+    telaDois__view__map:{
+        height: "38%",
+        backgroundColor: "white",
+        width: "100%"
     },
     telaDois__map:{
-        height: "60%",
-        backgroundColor: 'black'
+        height: "100%",
+        width: "100%"
     },
-    telaDois__instrucao:{
-        height: "32%",
+    telaDois__view__instruction:{
+        height: "38%",
+        backgroundColor: "white",
         width: "100%",
-        backgroundColor: 'white',
         alignSelf: "center",
-        marginBottom: 1,
-        /*Alterado o Height para apresentar embaixo da tela e acima o mapa. Se aplica a todos os elementos da telaDois */
+        alignContent: "center"
     },
-    telaDois__icon:{
-        height: "5%",
+    telaDois__view__icon:{
+        height: "4%",
     },
     telaDois__img__icon:{
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         alignSelf: "center",
-    },
-
-
-
-
+        alignContent: "center",
+        marginTop: "3%"
+    }
 });
 
 export {css};
