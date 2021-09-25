@@ -1,24 +1,27 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {Image, TextInput, View, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {css} from '../assets/css/Css';
 import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
 import config from '../config'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 
 export default function TelaInicial(props) {
 
-    let [origin, setOrigin]=useState(null);
-    let [destination, setDestination]=useState(null);
+    const navigation = useNavigation();
+    let [origin, setOrigin] = useState(null);
+    let [destination, setDestination] = useState(null);
 
-    useEffect(()=>{
-        (async function(){
-            const { status, permissions } = await Location.requestForegroundPermissionsAsync();
+
+    useEffect(() => {
+        (async function () {
+            const {status, permissions} = await Location.requestForegroundPermissionsAsync();
             if (status === 'granted') {
                 let location = await Location.getLastKnownPositionAsync({});
-                setOrigin(origin = {latitude: location.coords.latitude,
+                setOrigin(origin = {
+                    latitude: location.coords.latitude,
                     longitude: location.coords.longitude,
                     latitudeDelta: 0.000922,
                     longitudeDelta: 0.000421
@@ -27,7 +30,16 @@ export default function TelaInicial(props) {
                 throw new Error('Location permission not granted');
             }
         })();
-    },[]);
+    }, []);
+
+    function irTelaDois(latitudeDestination, longitudeDestination){
+        navigation.navigate("TelaDois", {
+            latitude: latitudeDestination,
+            longitude: longitudeDestination,
+            latitudeDelta: 0.000922,
+            longitudeDelta: 0.000421
+        });
+    }
 
     return (
         <View style={[css.container, css.greybg]}>
@@ -41,14 +53,16 @@ export default function TelaInicial(props) {
                             latitudeDelta: 0.000922,
                             longitudeDelta: 0.000421
                         });
-                    }}
+                        irTelaDois(details.geometry.location.lat, details.geometry.location.lng)
+                    }
+                    }
                     query={{
                         key: config.googleApi,
                         language: 'pt-br',
                     }}
                     enablePoweredByContainer={false}
                     fetchDetails={true}
-                    styles={{listView:{height:100}}}
+                    styles={{listView: {height: 100}}}
                 />
             </View>
             <View style={css.telaInicial__view__map}>
@@ -63,8 +77,8 @@ export default function TelaInicial(props) {
             </View>
 
             <View style={css.telaInicial__icon}>
-            <Image style={[css.telaInicial__img__icon]}
-                   source={require('../assets/images/icon.png')}/>
+                <Image style={[css.telaInicial__img__icon]}
+                       source={require('../assets/images/icon.png')}/>
             < /View>
         </View>
     );
