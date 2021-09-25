@@ -11,9 +11,9 @@ const css = StyleSheet.create({
         backgroundColor: "white",
         padding: 20
     },
-    greenbg:{
+    greybg:{
         width: "100%",
-        backgroundColor: "#00A859"
+        backgroundColor: "#484D50"
     },
     img__icon:{
         width: 110,
@@ -34,23 +34,22 @@ const css = StyleSheet.create({
     },
     login__input:{
         backgroundColor: "white",
-        fontSize: 19,
+        fontSize: 16,
         padding: 7,
         marginBottom: 30
     },
     login__button:{
-        padding: 15,
-        backgroundColor: "white",
+        padding: 12,
+        backgroundColor: "#00A859",
         alignSelf: "center",
         borderRadius: 5,
-        marginTop: 10,
-        width: 170,
+        width: "100%",
         alignItems: "center"
     },
     login__buttonText:{
         fontWeight: "bold",
         fontSize: 25,
-        color: "#00A859"
+        color: "white"
     },
     cadastro__form:{
         width: "80%",
@@ -64,7 +63,7 @@ const css = StyleSheet.create({
     },
     cadastro__button:{
         padding: 15,
-        backgroundColor: "#C0C0C0",
+        backgroundColor: "#00A859",
         alignSelf: "center",
         borderRadius: 5,
         marginTop: 10,
@@ -85,18 +84,20 @@ const css = StyleSheet.create({
     login__buttonTextCriarConta:{
         fontSize: 17,
         color: "#C0C0C0",
-        marginLeft: 30,
-        marginTop: 30
+        alignSelf: "center",
+        marginTop: "5%"
+        /*Cores da tela inicial e botões alterados para melhor aparência. Cores a Definir */
     },
     login__buttonEntrarComoConvidado:{
         padding: 15,
-        backgroundColor: "#C0C0C0",
+        backgroundColor: "#f7a156",
         alignSelf: "center",
         borderRadius: 5,
-        width: 250,
+        width: 220,
         height: 50,
         alignItems: "center",
-        marginTop: 80
+        position: "absolute",
+        marginTop: 260
     },
     login__buttonTextEntrarComoConvidado:{
         fontSize: 18,
@@ -108,25 +109,32 @@ const css = StyleSheet.create({
         justifyContent: 'center',
         flex: 1
     },
-    telaInicial__search:{
+    telaInicial__view__search:{
+        marginTop: "10%",
         backgroundColor: "white",
         fontSize: 19,
         padding: 7,
         width: "100%",
-        height: "10%",
-        // marginBottom: "50%"
+        height: "18%"
+    },
+    telaInicial__view__map:{
+        height: "70%",
+        backgroundColor: "white",
+        width: "100%"
     },
     telaInicial__map:{
-        height: "75%",
-        backgroundColor: 'gray'
+        height: "100%",
+        width: "100%"
     },
-    telaInicial__icon:{
-      height: "5%",
+    telaInicial__view__icon:{
+      height: "4%",
     },
     telaInicial__img__icon:{
         width: 50,
         height: 50,
         alignSelf: "center",
+        alignContent: "center",
+        marginTop: "1%"
     },
 
     telaDois__container: {
@@ -140,18 +148,21 @@ const css = StyleSheet.create({
         fontSize: 19,
         padding: 7,
         width: "100%",
-        height: "10%",
+        height: "8%",
         opacity: 0.5
         // marginBottom: "50%"
     },
     telaDois__map:{
-        height: "45%",
+        height: "60%",
         backgroundColor: 'black'
     },
     telaDois__instrucao:{
-        height: "30%",
+        height: "32%",
         width: "100%",
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        alignSelf: "center",
+        marginBottom: 1,
+        /*Alterado o Height para apresentar embaixo da tela e acima o mapa. Se aplica a todos os elementos da telaDois */
     },
     telaDois__icon:{
         height: "5%",

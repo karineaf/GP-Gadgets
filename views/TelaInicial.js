@@ -1,40 +1,71 @@
-import React, {useState} from 'react';
-import {Image, TextInput, View,} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {Image, TextInput, View, Text} from 'react-native';
 import {css} from '../assets/css/Css';
-import MapView from "react-native-maps";
+import MapView from 'react-native-maps';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+import config from '../config'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 export default function TelaInicial(props) {
 
-    const [destino, setDestino] = useState('none');
+    let [origin, setOrigin]=useState(null);
+    let [destination, setDestination]=useState(null);
 
-    async function sendForm() {
-        let response = await fetch('https://192.168.15.127:3000/telaInicial', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                destino: destino
-            })
-        })
-    }
+    useEffect(()=>{
+        (async function(){
+            const { status, permissions } = await Location.requestForegroundPermissionsAsync();
+            if (status === 'granted') {
+                let location = await Location.getLastKnownPositionAsync({});
+                setOrigin(origin = {latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                    latitudeDelta: 0.000922,
+                    longitudeDelta: 0.000421
+                })
+            } else {
+                throw new Error('Location permission not granted');
+            }
+        })();
+    },[]);
 
     return (
-        <View style={[css.container, css.greenbg]}>
-            <TextInput style={css.telaInicial__search} placeholder={'destino'} onChangeText={text => setDestino(text)}/>
-            {/*<MapView style={css.telaInicial__map}*/}
-            {/*         initialRegion={{*/}
-            {/*             latitude: -23.53518,*/}
-            {/*             longitude: -46.63396,*/}
-            {/*             latitudeDelta: 0.0922,*/}
-            {/*             longitudeDelta: 0.0421*/}
-            {/*         }}*/}
-            {/*>*/}
-            <MapView style={css.telaInicial__map} />
+        <View style={[css.container, css.greybg]}>
+            <View style={css.telaInicial__view__search}>
+                <GooglePlacesAutocomplete
+                    placeholder='Qual é o seu destino?'
+                    onPress={(data, details = null) => {
+                        setDestination(destination = {
+                            latitude: details.geometry.location.lat,
+                            longitude: details.geometry.location.lng,
+                            latitudeDelta: 0.000922,
+                            longitudeDelta: 0.000421
+                        });
+                    }}
+                    query={{
+                        key: config.googleApi,
+                        language: 'pt-br',
+                    }}
+                    enablePoweredByContainer={false}
+                    fetchDetails={true}
+                    styles={{listView:{height:100}}}
+                />
+            </View>
+            <View style={css.telaInicial__view__map}>
+                <MapView
+                    style={css.telaInicial__map}
+                    initialRegion={origin}
+                    showsUserLocation={true}
+                    zoomEnabled={false}
+                    loadingEnabled={true}
+                >
+                </MapView>
+            </View>
 
-            <Image style={[css.telaInicial__img__icon, css.telaInicial__icon]}
+            <View style={css.telaInicial__icon}>
+            <Image style={[css.telaInicial__img__icon]}
                    source={require('../assets/images/icon.png')}/>
+            < /View>
         </View>
     );
 
