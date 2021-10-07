@@ -79,7 +79,7 @@ export default function TelaInicial(props) {
             <View style={css.telaInicial__icon}>
                 <Image style={[css.telaInicial__img__icon]}
                        source={require('../assets/images/icon.png')}/>
-            < /View>
+            </View>
         </View>
     );
 
