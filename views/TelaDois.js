@@ -114,7 +114,7 @@ export default function TelaDois({route}) {
             <View style={css.telaDois__icon}>
                 <Image style={[css.telaDois__img__icon]}
                        source={require('../assets/images/icon.png')}/>
-            < /View>
+            </View>
         </View>
     );
 
