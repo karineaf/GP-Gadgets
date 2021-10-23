@@ -18,24 +18,24 @@ export default function TelaDois({route}){
     let mapElement=useRef(null)
     let [origin, setOrigin] = useState(null);
     let [destination, setDestination] = useState(destination = {
-        latitude: route.params.latitude,
-        longitude: route.params.longitude,
+        latitude: route.params?.latitude,
+        longitude: route.params?.longitude,
         latitudeDelta: 0.000922,
         longitudeDelta: 0.000421});
     const [distance, setDistance] = useState(null);
     
     async function getDirectionFromApi(){
-        return await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},`+`${origin.longitude}&destination=${destination.latitude},`+`${destination.longitude}&avoid=highways&mode=walking&key=AIzaSyCNI4dqQDX8RTTzwY5f1fKGZRjRil0eEoQ`)
+        return await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},`+`${origin.longitude}&destination=${destination.latitude},`+`${destination.longitude}&avoid=highways&mode=walking&key=${config.googleApi}`)
         .then(response => response.json())
         .then(data => {
             let parts = data.routes[0].legs[0].steps
             
             
             if (parts[1].maneuver){
-                if(parts[1].maneuver.include('turn-right')){
+                if(parts[1].maneuver.includes('turn-right')){
                     console.log(parts[1].maneuver)
                 }
-                else if(parts[1].maneuver.include('turn-left')){
+                else if(parts[1].maneuver.includes('turn-left')){
                     console.log(parts[1].maneuver)
                 }
             }
@@ -62,15 +62,15 @@ export default function TelaDois({route}){
                     latitudeDelta: 0.000922,
                     longitudeDelta: 0.000421
                 })
-
+                
+            
             } else {
                 throw new Error('Location permission not granted');
             }    
-            
+            getDirectionFromApi();
             })();
-            
-    });
-
+    },[]);
+    
     return (
         <View style={[css.container, css.greybg]}>
             <View style={css.telaDois__view__search}>
