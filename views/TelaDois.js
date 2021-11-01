@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef, setState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, View, Vibration} from 'react-native';
 import {css} from '../assets/css/Css';
 import MapView, { LocalTile, AnimatedRegion, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -10,11 +10,9 @@ import MapViewDirections from 'react-native-maps-directions';
 import {useNavigation} from '@react-navigation/native';
 // import {route} from "express/lib/router";
 
-
 export default function TelaDois({route}){
 
     const navigation = useNavigation();
-
     let mapElement=useRef(null)
     let [origin, setOrigin] = useState(null);
     let [destination, setDestination] = useState(destination = {
@@ -23,20 +21,32 @@ export default function TelaDois({route}){
         latitudeDelta: 0.000922,
         longitudeDelta: 0.000421});
     const [distance, setDistance] = useState(null);
+    const [watch, setWatch] = useState(null);
     
+
+    const durationRight = [1000, 3000, 1000, 3000];
+    const durationLeft = [2000, 2000, 2000, 2000];
+    
+
     async function getDirectionFromApi(){
         return await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},`+`${origin.longitude}&destination=${destination.latitude},`+`${destination.longitude}&avoid=highways&mode=walking&key=${config.googleApi}`)
         .then(response => response.json())
         .then(data => {
             let parts = data.routes[0].legs[0].steps
-            
+            console.log(parts[1])
             
             if (parts[1].maneuver){
-                if(parts[1].maneuver.includes('turn-right')){
-                    console.log(parts[1].maneuver)
+                if(parts[1].maneuver.includes('right')){
+                    console.log(parts[1].maneuver);
+                    Vibration.vibrate(durationRight)
                 }
-                else if(parts[1].maneuver.includes('turn-left')){
-                    console.log(parts[1].maneuver)
+                else if(parts[1].maneuver.includes('left')){
+                    console.log(parts[1].maneuver);
+                    Vibration.vibrate(durationLeft)
+                }
+                else{
+                    console.log(parts[1].html_instructions);
+                    console.log('reto');
                 }
             }
             else{
@@ -48,8 +58,7 @@ export default function TelaDois({route}){
         .catch(error =>{
         });
     }
-
-
+    
     
     useEffect(() => {
         (async function () {
@@ -61,40 +70,19 @@ export default function TelaDois({route}){
                     longitude: location.coords.longitude,
                     latitudeDelta: 0.000922,
                     longitudeDelta: 0.000421
-                })
+                });
                 
-            
+                
             } else {
                 throw new Error('Location permission not granted');
-            }    
+            }   
             getDirectionFromApi();
+            
             })();
     },[]);
-    
     return (
         <View style={[css.container, css.greybg]}>
-            <View style={css.telaDois__view__search}>
-                <GooglePlacesAutocomplete
-                    placeholder='Qual é o seu destino?'
-                    onPress={(data, details = null) => {
-                        setDestination(destination = {
-                            latitude: details.geometry.location.lat,
-                            longitude: details.geometry.location.lng,
-                            latitudeDelta: 0.000922,
-                            longitudeDelta: 0.000421
-                        });
-                        
-                    }
-                    }
-                    query={{
-                        key: config.googleApi,
-                        language: 'pt-br',
-                    }}
-                    enablePoweredByContainer={false}
-                    fetchDetails={true}
-                    styles={{listView: {height: 100}}}
-                />
-            </View>
+            
             <View style={css.telaDois__view__map}>
                 <MapView
                     style={css.telaDois__map}
@@ -116,7 +104,6 @@ export default function TelaDois({route}){
                             }
 
                             onReady={result=>{
-                                
                                 setDistance(result.distance);                                
                                 mapElement.current.fitToCoordinates(
                                     result.coordinates,{
@@ -137,11 +124,11 @@ export default function TelaDois({route}){
             {distance &&
             <View style={css.telaDois__view__instruction}>
                 <Text>Distância:{distance}m
+                        
                 </Text>
-                <Text></Text>      
             </View>
             }
-            
+                
             <View style={css.telaDois__icon}>
                 <Image style={[css.telaDois__img__icon]}
                        source={require('../assets/images/icon.png')}/>
