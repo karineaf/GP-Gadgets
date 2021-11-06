@@ -42,45 +42,41 @@ export default function TelaInicial(props) {
     }
 
     return (
-        <View style={[css.container, css.greybg]}>
-            <View style={css.telaInicial__view__search}>
-                <GooglePlacesAutocomplete
-                    placeholder='Qual é o seu destino?'
-                    onPress={(data, details = null) => {
-                        setDestination(destination = {
-                            latitude: details.geometry.location.lat,
-                            longitude: details.geometry.location.lng,
-                            latitudeDelta: 0.000922,
-                            longitudeDelta: 0.000421
-                        });
-                        irTelaDois(details.geometry.location.lat, details.geometry.location.lng)
-                    }
-                    }
-                    query={{
-                        key: config.googleApi,
-                        language: 'pt-br',
-                    }}
-                    enablePoweredByContainer={false}
-                    fetchDetails={true}
-                    styles={{listView: {height: 100}}}
-                />
-            </View>
-            <View style={css.telaInicial__view__map}>
+        <View style={css.containerAll}>
+    
+                <View style={css.TelaInicialPesquisa}>
+                    <GooglePlacesAutocomplete
+                        placeholder='Qual é o seu destino?'
+                        onPress={(data, details = null) => {
+                            setDestination(destination = {
+                                latitude: details.geometry.location.lat,
+                                longitude: details.geometry.location.lng,
+                                latitudeDelta: 0.000922,
+                                longitudeDelta: 0.000421
+                            });
+                            irTelaDois(details.geometry.location.lat, details.geometry.location.lng)
+                        }
+                        }
+                        query={{
+                            key: config.googleApi,
+                            language: 'pt-br',
+                        }}
+                        enablePoweredByContainer={false}
+                        fetchDetails={true}
+                    />
+                </View>
+
+            <View style={css.containerBack}>
                 <MapView
-                    style={css.telaInicial__map}
+                    style={css.Mapa}
                     initialRegion={origin}
                     showsUserLocation={true}
-                    zoomEnabled={false}
+                    zoomEnabled={true}
                     loadingEnabled={true}
-                >
-                </MapView>
-            </View>
-
-            <View style={css.telaInicial__icon}>
-                <Image style={[css.telaInicial__img__icon]}
-                       source={require('../assets/images/icon.png')}/>
+                />
             </View>
         </View>
+
     );
 
 }
