@@ -1,12 +1,55 @@
 import {StyleSheet} from "react-native";
 
 const css = StyleSheet.create({
-    container: {
+    
+    //Layout principal
+    containerAll: {
         flex: 1,
-        backgroundColor: "#00A859",
         alignItems: "center",
-        justifyContent: "center",
     },
+
+    containerBack: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+    },
+
+    TelaInicialPesquisa:{
+        padding: 5,
+        marginTop: "10%",
+        width: "100%",
+        height: "30%",
+        zIndex: 1,
+    },
+
+    Mapa:{
+        height: "100%",
+        width: '100%',
+    },
+
+    telaInicial__map:{
+        height: "100%",
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     textPage:{
         backgroundColor: "white",
         padding: 20
@@ -107,25 +150,11 @@ const css = StyleSheet.create({
         backgroundColor: "#00A859",
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1
-    },
-    telaInicial__view__search:{
-        marginTop: "10%",
-        backgroundColor: "white",
-        fontSize: 19,
-        padding: 7,
-        width: "100%",
-        height: "18%"
-    },
-    telaInicial__view__map:{
-        height: "70%",
-        backgroundColor: "white",
+        flex: 1,
         width: "100%"
     },
-    telaInicial__map:{
-        height: "100%",
-        width: "100%"
-    },
+
+
     telaInicial__view__icon:{
       height: "4%",
     },
@@ -175,6 +204,11 @@ const css = StyleSheet.create({
         alignSelf: "center",
         alignContent: "center",
         marginTop: "3%"
+    },
+    imageicon:{
+        width: 100,
+        height: 100,
+        left: 160,
     }
 });
 
