@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-import React, {useEffect, useState, useRef, Component} from 'react';
-import {Image, Text, View, Vibration, Button, TouchableOpacity} from 'react-native';
-=======
 import React, {useEffect, useState, useRef, setState} from 'react';
 import {Image, Text, View, Button} from 'react-native';
->>>>>>> Stashed changes
 import {css} from '../assets/css/Css';
 import MapView, { LocalTile, AnimatedRegion, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -13,12 +8,9 @@ import config from '../config'
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import MapViewDirections from 'react-native-maps-directions';
 import {useNavigation} from '@react-navigation/native';
-<<<<<<< Updated upstream
-=======
 import { counterEvent } from 'react-native/Libraries/Performance/Systrace';
 import { response } from 'express';
 // import {route} from "express/lib/router";
->>>>>>> Stashed changes
 
 // import {route} from "express/lib/router";
 
@@ -58,10 +50,6 @@ export default function TelaDois({route}){
         return await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},`+`${origin.longitude}&destination=${destination.latitude},`+`${destination.longitude}&avoid=highways&mode=walking&key=${config.googleApi}`)
         .then(response => response.json())
         .then(data => {
-<<<<<<< Updated upstream
-            setParts(data.routes[0].legs[0].steps)
-            
-=======
             let parts = data.routes[0].legs[0].steps
             let caminho = []
 
@@ -82,7 +70,6 @@ export default function TelaDois({route}){
                 }*/
             }
 
->>>>>>> Stashed changes
             if (parts[1].maneuver){
                 if(parts[1].maneuver.includes('right')){
                     console.log(parts[1].maneuver);
@@ -240,9 +227,6 @@ function Direcao(){
                     <MapView.Marker coordinate={destination}/>
                 </MapView>
             </View>
-<<<<<<< Updated upstream
-            <Direcao/>
-=======
             {distance &&
             <View style={css.telaDois__view__instruction}>
                 <Text>Distância:{distance}m
@@ -255,7 +239,6 @@ function Direcao(){
                 <Image style={[css.telaDois__img__icon]}
                        source={require('../assets/images/icon.png')}/>
             </View>
->>>>>>> Stashed changes
         </View>
     );
 
