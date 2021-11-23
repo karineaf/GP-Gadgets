@@ -6,6 +6,8 @@ const css = StyleSheet.create({
     containerAll: {
         flex: 1,
         alignItems: "center",
+        width: '100%',
+        height: '100%'
     },
 
     containerBack: {
@@ -32,6 +34,20 @@ const css = StyleSheet.create({
 
     },
 
+    infohtml:{
+        zIndex: 1,
+        backgroundColor: "white",
+        borderRadius: 100,
+        width: 400,
+        height: 50,
+        alignItems: "center",
+        padding: 15,
+    },
+    imagemproximo:{
+        width: 100,
+        height: 100,
+        marginTop: "170%"
+    },
 
 
 
