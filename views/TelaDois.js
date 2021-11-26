@@ -30,12 +30,15 @@ export default function TelaDois({route}){
     const [posicao, setPosicao] = useState(0);
     const [vdirecoes, setDirecoes] = useState(null);
     const [vdicas, setDicas] = useState('');
+    const [convert, setConvert] = useState('');
+    const [qntvetor, setQnt] = useState(5);
 
     
     
 
-    const durationRight = [1000, 1000, 1000, 1000];
+    const durationRight = [1000, 1000, 1000, 1000, 1000];
     const durationLeft = [2000, 2000, 2000, 2000];
+    const durationFinish = [1000, 1000, 1000, 1000, 1000, 1000, 1000];
     const { width } = useWindowDimensions();
     
 
@@ -43,6 +46,7 @@ export default function TelaDois({route}){
         return await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},`+`${origin.longitude}&destination=${destination.latitude},`+`${destination.longitude}&avoid=highways&mode=walking&key=${config.googleApi}`)
         .then(response => response.json())
         .then(data => {
+
             setParts(data.routes[0].legs[0].steps)
 
 
@@ -75,28 +79,46 @@ export default function TelaDois({route}){
 
 
 async function MudarPosicao(){
-    
-    setPosicao(posicao+1);
-    setDicas(parts[posicao].html_instructions)
-
-            if(parts[posicao].maneuver){
-                if(parts[posicao].maneuver.includes('right')){
-                    setDirecoes('Direita')
-                    Vibration.vibrate(durationRight)
-                }else if(parts[posicao].maneuver.includes('left')){
-                    setDirecoes('Esquerda')
-                    Vibration.vibrate(durationLeft)
-                }else{
-                    setDirecoes('Siga')
-                }
-            };
-
 
     console.log('**********************************')
+    console.log(qntvetor)
+    console.log(posicao)
     console.log(vdirecoes)
-    console.log(vdicas)
+    console.log(convert)
 
     
+    setQnt(parts.length)
+    setPosicao(posicao+1);
+    
+        
+
+
+        if(posicao < qntvetor){
+
+            setDicas(parts[posicao].html_instructions)
+            setConvert(vdicas.replace(/<[^>]+>/g, ''))
+
+                if(parts[posicao].maneuver){
+                        if(parts[posicao].maneuver.includes('right')){
+                            setDirecoes('Direita')
+                            Vibration.vibrate(durationRight)
+                        }else if(parts[posicao].maneuver.includes('left')){
+                            setDirecoes('Esquerda')
+                            Vibration.vibrate(durationLeft)
+                        }else{
+                            setDirecoes('Siga')
+                        }
+                }else{
+                    
+                    setDicas(parts[posicao].html_instructions)
+                    setConvert(vdicas.replace(/<[^>]+>/g, ''))
+
+                }                
+            }else{
+                setDicas("Você chegou ao seu destino! :)")
+                setConvert(vdicas.replace(/<[^>]+>/g, ''))
+                Vibration.vibrate(durationFinish)
+            }    
     
 }
 
@@ -147,7 +169,7 @@ async function MudarPosicao(){
                 <Image style={css.imagemproximo} source={require('../assets/images/icon.png')}/>
             </TouchableOpacity>
             <View style={css.infohtml}>
-                <Text> {vdicas} </Text>
+                <Text> {convert} </Text>
             </View>
         </View>
     );
